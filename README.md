@@ -171,9 +171,10 @@ POST /api/coupons/consume?code=WELCOME10&orderId=12345
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/coupon_db
 spring.datasource.username=root
-spring.datasource.password=yourpassword
-spring.jpa.hibernate.ddl-auto=update
+spring.datasource.password=
+spring.jpa.hibernate.ddl-auto=create-drop
 spring.jpa.show-sql=true
+spring.data.jdbc.dialect=mysql
 ```
 
 ---
