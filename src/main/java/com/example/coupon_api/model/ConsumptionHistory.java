@@ -14,7 +14,6 @@ public class ConsumptionHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String customerEmail;
     private String orderId;
 
     @ManyToOne

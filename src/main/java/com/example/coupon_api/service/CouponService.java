@@ -31,9 +31,9 @@ public class CouponService {
         return historyRepo.findAll();
     }
 
-    public void consumeCoupon(String code, String customerEmail, String orderId) {
+    public void consumeCoupon(String code, String orderId) {
         Coupon coupon = couponRepo.findByCode(code)
-            .orElseThrow(() -> new RuntimeException("Coupon not found"));
+                .orElseThrow(() -> new RuntimeException("Coupon not found"));
 
         if (coupon.getExpiryDate().isBefore(LocalDate.now())) {
             throw new CouponExpiredException("Coupon has expired");
@@ -48,9 +48,9 @@ public class CouponService {
 
         ConsumptionHistory history = new ConsumptionHistory();
         history.setCoupon(coupon);
-        history.setCustomerEmail(customerEmail);
         history.setOrderId(orderId);
         history.setUsedAt(LocalDateTime.now());
         historyRepo.save(history);
     }
+
 }
