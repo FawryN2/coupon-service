@@ -75,6 +75,95 @@ http://localhost:8080/swagger-ui/index.html
 | GET    | `/api/coupons`         | List all coupons           |
 | GET    | `/api/coupons/history` | Get usage history          |
 
+### 📌 Endpoint Details
+
+#### 1. **Create a Coupon**
+- **URL:** `/api/coupons`
+- **Method:** `POST`
+- **Request Body:**
+```json
+{
+  "code": "WELCOME10",
+  "usageLimit": 5,
+  "usedCount": 0,
+  "expiryDate": "2025-12-31",
+  "discountType": "PERCENTAGE",
+  "discountValue": 10.0
+}
+```
+- **Response:**
+```json
+{
+  "id": 1,
+  "code": "WELCOME10",
+  "usageLimit": 5,
+  "usedCount": 0,
+  "expiryDate": "2025-12-31",
+  "discountType": "PERCENTAGE",
+  "discountValue": 10.0
+}
+```
+
+#### 2. **Consume a Coupon**
+- **URL:** `/api/coupons/consume`
+- **Method:** `POST`
+- **Query Parameters:**
+    - `code` (string): The coupon code
+    - `customerEmail` (string): The customer's email address
+    - `orderId` (string): The associated order ID
+
+- **Example Request:**
+```
+POST /api/coupons/consume?code=WELCOME10&orderId=12345
+```
+
+- **Response:**
+```json
+"Coupon consumed successfully"
+```
+
+#### 3. **List All Coupons**
+- **URL:** `/api/coupons`
+- **Method:** `GET`
+- **Response:**
+```json
+[
+  {
+    "id": 1,
+    "code": "WELCOME10",
+    "usageLimit": 5,
+    "usedCount": 1,
+    "expiryDate": "2025-12-31",
+    "discountType": "PERCENTAGE",
+    "discountValue": 10.0
+  }
+]
+```
+
+#### 4. **Get Coupon Consumption History**
+- **URL:** `/api/coupons/history`
+- **Method:** `GET`
+- **Response:**
+```json
+[
+  {
+    "id": 1,
+    "customerEmail": "test@example.com",
+    "orderId": "12345",
+    "coupon": {
+      "id": 1,
+      "code": "WELCOME10",
+      "usageLimit": 5,
+      "usedCount": 1,
+      "expiryDate": "2025-12-31",
+      "discountType": "PERCENTAGE",
+      "discountValue": 10.0
+    },
+    "usedAt": "2025-07-29T23:45:00"
+  }
+]
+```
+
 ---
 
 ## ⚙️ Config (application.properties)
