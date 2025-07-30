@@ -31,7 +31,6 @@ public class CouponController {
     }
 
 
-
     @GetMapping
     public List<Coupon> getAllCoupons() {
         return couponService.getAllCoupons();
