@@ -9,7 +9,7 @@ A lightweight Spring Boot microservice to manage discount coupons. Built with My
 - Create coupons with expiry, usage limits, and discount types (fixed or percentage)
 - Consume coupons, log usage, and return discount value for other services
 - View all coupons and their history
-- RESTful API with Swagger documentation
+- RESTful API
 - MySQL-based persistence
 - Unit and integration tests
 - Docker-ready
@@ -48,23 +48,6 @@ Services:
 
 ---
 
-## 🌐 Swagger UI
-
-Visit:
-
-```
-http://localhost:8080/swagger-ui/index.html
-```
-
----
-
-## 🧪 Run Tests
-
-```bash
-./mvnw test
-```
-
----
 
 ## 📂 API Endpoints
 
