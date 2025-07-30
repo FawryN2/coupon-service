@@ -141,7 +141,7 @@ POST /api/coupons/consume?code=WELCOME10&orderId=12345&orderTotal=100.0
     "expiryDate": "2025-12-31",
     "discountType": "PERCENTAGE",
     "discountValue": 10.0,
-  "minOrder": 50
+    "minOrder": 50
   }
 ]
 ```
