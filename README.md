@@ -7,7 +7,7 @@ A lightweight Spring Boot microservice to manage discount coupons. Built with My
 ## 🔧 Features
 
 - Create coupons with expiry, usage limits, and discount types (fixed or percentage)
-- Consume coupons and log usage
+- Consume coupons, log usage, and return discount value for other services
 - View all coupons and their history
 - RESTful API with Swagger documentation
 - MySQL-based persistence
@@ -88,7 +88,8 @@ http://localhost:8080/swagger-ui/index.html
   "usedCount": 0,
   "expiryDate": "2025-12-31",
   "discountType": "PERCENTAGE",
-  "discountValue": 10.0
+  "discountValue": 10.0,
+  "minOrder": 50
 }
 ```
 - **Response:**
@@ -100,7 +101,8 @@ http://localhost:8080/swagger-ui/index.html
   "usedCount": 0,
   "expiryDate": "2025-12-31",
   "discountType": "PERCENTAGE",
-  "discountValue": 10.0
+  "discountValue": 10.0,
+  "minOrder": 50
 }
 ```
 
@@ -109,17 +111,20 @@ http://localhost:8080/swagger-ui/index.html
 - **Method:** `POST`
 - **Query Parameters:**
     - `code` (string): The coupon code
-    - `customerEmail` (string): The customer's email address
-    - `orderId` (string): The associated order ID
+    - `orderId` (string): The order ID
+    - `orderTotal` (double): Total amount of the order
 
 - **Example Request:**
 ```
-POST /api/coupons/consume?code=WELCOME10&orderId=12345
+POST /api/coupons/consume?code=WELCOME10&orderId=12345&orderTotal=100.0
 ```
 
 - **Response:**
 ```json
-"Coupon consumed successfully"
+{
+  "message": "Coupon consumed successfully",
+  "discount": 10.0
+}
 ```
 
 #### 3. **List All Coupons**
@@ -135,7 +140,8 @@ POST /api/coupons/consume?code=WELCOME10&orderId=12345
     "usedCount": 1,
     "expiryDate": "2025-12-31",
     "discountType": "PERCENTAGE",
-    "discountValue": 10.0
+    "discountValue": 10.0,
+  "minOrder": 50
   }
 ]
 ```
@@ -148,8 +154,8 @@ POST /api/coupons/consume?code=WELCOME10&orderId=12345
 [
   {
     "id": 1,
-    "customerEmail": "test@example.com",
     "orderId": "12345",
+    "orderTotal": 100.0,
     "coupon": {
       "id": 1,
       "code": "WELCOME10",
@@ -157,7 +163,8 @@ POST /api/coupons/consume?code=WELCOME10&orderId=12345
       "usedCount": 1,
       "expiryDate": "2025-12-31",
       "discountType": "PERCENTAGE",
-      "discountValue": 10.0
+      "discountValue": 10.0,
+      "minOrder": 50
     },
     "usedAt": "2025-07-29T23:45:00"
   }

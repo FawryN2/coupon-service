@@ -40,7 +40,7 @@ public class CouponService {
         }
 
         if (orderTotal < coupon.getMinOrder()) {
-            throw new RuntimeException("Order total must be at least : " + coupon.getMinOrder()  + "for the coupon to be applied");
+            throw new RuntimeException("Order total value must be at least : " + coupon.getMinOrder()  + "for the coupon to be applied");
         }
 
         if (coupon.getUsedCount() >= coupon.getUsageLimit()) {
@@ -58,13 +58,12 @@ public class CouponService {
         historyRepo.save(history);
 
         // Calculate discount value
-        double discount = switch (coupon.getDiscountType()) {
+
+        return switch (coupon.getDiscountType()) {
             case PERCENTAGE -> orderTotal * (coupon.getDiscountValue() / 100);
             case FIXED -> coupon.getDiscountValue();
             default -> throw new RuntimeException("Unknown discount type");
         };
-
-        return discount;
     }
 
 }
