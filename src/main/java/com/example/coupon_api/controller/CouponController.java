@@ -24,10 +24,12 @@ public class CouponController {
 
     @PostMapping("/consume")
     public ResponseEntity<String> consumeCoupon(@RequestParam String code,
-                                                @RequestParam String orderId) {
-        couponService.consumeCoupon(code, orderId);
-        return ResponseEntity.ok("Coupon consumed successfully");
+                                                @RequestParam String orderId,
+                                                @RequestParam double orderTotal) {
+        double discount = couponService.consumeCoupon(code, orderId, orderTotal);
+        return ResponseEntity.ok("Coupon consumed successfully. Discount: " + discount);
     }
+
 
 
     @GetMapping

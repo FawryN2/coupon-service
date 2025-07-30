@@ -16,6 +16,7 @@ public class ConsumptionHistory {
 
     private String orderId;
 
+    private double orderTotal;
     @ManyToOne
     private Coupon coupon;
 

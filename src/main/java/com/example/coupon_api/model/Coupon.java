@@ -21,6 +21,8 @@ public class Coupon {
     @Column(nullable = false)
     private int usageLimit;
 
+    private int MinOrder;
+
     private int usedCount = 0;
 
     private LocalDate expiryDate=LocalDate.now();
